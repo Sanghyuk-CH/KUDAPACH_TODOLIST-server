@@ -13,8 +13,22 @@ module.exports = {
       .then((data) =>
         todocard.findAll({ where: { userid: data.dataValues.id } }),
       )
-      .then((data) => res.status(200).json({ data: data.dataValues }))
+      .then((data) => res.status(200).json({ data: data }))
       .catch((err) => res.status(500).send(err));
+  },
+
+  create: async (req, res) => {
+    const id = req.cookies.id;
+    const { color } = req.body;
+
+    await user.findOne({ where: { id }, attributes: ['id'] }).then((data) =>
+      todocard.create({
+        userid: data.dataValues.id,
+        color,
+      }),
+    );
+
+    res.status(200).send('succesfully created');
   },
 
   edit: async (req, res) => {
