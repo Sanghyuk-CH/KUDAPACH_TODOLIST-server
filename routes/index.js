@@ -5,7 +5,7 @@ const router = express.Router();
 const { controllers } = require('../controllers');
 
 // * OAUTH https://server.kudapach.com/oauth
-router.post('/oauth/google', controllers.oauth.post);
+router.post('/oauth', controllers.oauth.post);
 
 // * POST https://server.kudapach.com/signin
 router.post('/signin', controllers.signin.post);
@@ -14,7 +14,7 @@ router.post('/signin', controllers.signin.post);
 router.post('/signup', controllers.signup.post);
 
 // * POST https://server.kudapach.com/signout
-router.post('/signout', controllers.signout);
+router.post('/signout', controllers.signout.post);
 
 // * GET https://server.kudapach.com/user/info
 router.get('/user/info', controllers.user.get);
@@ -23,7 +23,7 @@ router.get('/user/info', controllers.user.get);
 router.post('/user/info/edit', controllers.user.edit);
 
 // * POST https://server.kudapach.com/todo
-router.post('/todo', controllers.todo.get);
+router.get('/todo', controllers.todo.get);
 
 // * POST https://server.kudapach.com/todo/edit
 router.post('/todo/edit', controllers.todo.edit);
