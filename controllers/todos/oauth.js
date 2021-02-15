@@ -10,7 +10,7 @@ module.exports = {
         defaults: {
           password: 'null',
           username,
-          mobile: 'null',
+          mobile: ' ',
         },
       })
       .then((result) => {
@@ -31,19 +31,21 @@ module.exports = {
                 }),
               ),
             );
-            res.cookie('id', result[0].id, {
-              domain: ['https://kudapach.com', 'https://www.kudapach.com'],
-              path: '/',
-              sameSite: 'none',
-              httpOnly: true,
-              secure: true,
-            });
-            res.status(200).send({
-              data: result[0],
-              groups: dat,
-              groupnames: groupname,
-              oauth: true,
-            });
+            res
+              .status(200)
+              .cookie('id', result[0].id, {
+                // domain: ['https://kudapach.com', 'https://www.kudapach.com'],
+                //  path: '/',
+                sameSite: 'none',
+                httpOnly: true,
+                secure: true,
+              })
+              .json({
+                data: result[0],
+                groups: dat,
+                groupnames: groupname,
+                oauth: true,
+              });
           })
           .catch((err) => {
             res.status(500).send(err);
